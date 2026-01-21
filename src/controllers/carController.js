@@ -16,7 +16,7 @@ export const createCar = async (req, res) => {
         const imageUrls = [];
         if (files && files.length > 0) {
             for (const file of files) {
-                const url = await uploadToStorage(file.buffer, file.originalname);
+                const url = await uploadToStorage(file.buffer, file.originalname, file.mimetype);
                 imageUrls.push(url);
             }
         }
@@ -42,7 +42,9 @@ export const createCar = async (req, res) => {
         // Notify Admins
         await notifyAdmins('New Car Listing', `User submitted a new car listing: ${year} ${brand} ${model}`, 'car', result.insertId);
     } catch (error) {
-        console.error("Error creating car:", error);
+        console.error("❌ Error creating car:", error);
+        console.error("Error message:", error.message);
+        console.error("Error stack:", error.stack);
         res.status(500).json({ message: error.message || 'Failed to create listing' });
     }
 };

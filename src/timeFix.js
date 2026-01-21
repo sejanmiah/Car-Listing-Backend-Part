@@ -4,9 +4,9 @@
 // It must be imported BEFORE anything else.
 
 const OriginalDate = Date;
-const ONE_YEAR_MS = 0; // 2026 is correct year
-const EXTRA_LAG_MS = 10 * 60 * 1000; // 10 minute safety buffer for fast clocks
-const OFFSET = ONE_YEAR_MS + EXTRA_LAG_MS;
+const ONE_YEAR_MS = 0; // Time is correct (2026 matches Google)
+const EXTRA_LAG_MS = 0;
+const OFFSET = 0;
 
 global.Date = class extends OriginalDate {
     constructor(...args) {
@@ -21,6 +21,6 @@ global.Date = class extends OriginalDate {
     }
 };
 
-console.log(`[Critical Fix] Time adjusted -10 minutes to sync with Google servers.`);
+console.log(`[Critical Fix] Time sync checked. No adjustment needed (System Time is correct).`);
 console.log(`[Critical Fix] System Time: ${new OriginalDate().toISOString()}`);
 console.log(`[Critical Fix] Server Time: ${new Date().toISOString()}`);

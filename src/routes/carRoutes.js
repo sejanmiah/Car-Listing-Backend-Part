@@ -9,7 +9,7 @@ const router = Router();
 router.get('/', getCars);
 
 // User Protected (requires approval)
-router.post('/', verifyToken, isApproved, upload.array('images', 5), createCar);
+router.post('/', verifyToken, isApproved, upload.array('images', 10), createCar);
 router.get('/my-listings', verifyToken, isApproved, getUserCars);
 
 // Admin Protected
